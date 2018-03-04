@@ -1,0 +1,42 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+li a {
+    display: block;
+    color: rgb(89, 92, 89);
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+li div:hover:not(.active), li a:hover:not(.active){
+    background-color:#f1f1f1;
+    color: #673ab7;
+    cursor: pointer;
+}
+
+
+
+li div{
+    outline: none;
+}
+
+.active-link, .active-link a{
+    background-color:#f1f1f1;
+    color: #673ab7;
+}
+
+
+.menu-icon{
+    line-height: 2.3;
+    padding-left: 0.7em;
+    font-size: 16px;
+}

@@ -1,0 +1,42 @@
+<router-outlet name="header"></router-outlet>
+<mat-sidenav-container class="example-container" >
+        <app-loader></app-loader>
+        <mat-sidenav #sidenav mode="side" [(opened)]="opened" >
+                <mat-toolbar>
+                        <span>iot-app</span>
+                        <div fxFelx></div>
+                        <!-- <app-network-indigator></app-network-indigator> -->
+                </mat-toolbar>
+                <router-outlet name="sidenav"></router-outlet>
+        </mat-sidenav>
+    <mat-sidenav-content [ngClass]="{'mat-sidenav-content-login': !authSrv.isAuthenticated(), 'mat-sidenav-content-main': authSrv.isAuthenticated()}">
+        <article fxFlex fxFlexFill>
+                <router-outlet></router-outlet>
+        </article>
+
+        <footer>
+         <!-- <router-outlet name="footer"></router-outlet>  -->
+        
+        </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <mat-sidenav-container>
+        <mat-sidenav #sidenav mode="over" [(opened)]="opened">
+                <router-outlet name="sidenav"></router-outlet>
+        </mat-sidenav>
+        
+        <div fxLayout="column" fxLayoutAlign="space-between stretch" fxFlexFill>
+                        <header fxFlexFill>
+                                        <router-outlet name="header"></router-outlet>
+                                </header>
+               <article fxFlex fxFlexFill>
+                <router-outlet></router-outlet>
+                </article>
+
+                <footer>
+                <router-outlet name="footer"></router-outlet> 
+                </footer>
+        </div>
+</mat-sidenav-container> -->
+              

@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" *ngIf="authSrv.isAuthenticated()">
+    <button  aria-label="menu" mat-icon-button  (click)="opened = !opened;toggleSideNav(opened)" >
+      <mat-icon class="zmdi zmdi-menu zmdi-hc-2x"></mat-icon>
+    </button>
+    <div fxFlex></div>
+    <mat-menu #appMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon class="zmdi zmdi-settings"></mat-icon>
+          <span> {{ 'Setting' | translate }}</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon class="zmdi zmdi-sign-in"></mat-icon>
+          <span> {{ 'Logout' | translate }} </span>
+        </button>
+      </mat-menu>
+      
+      <button *ngIf="authSrv.isAuthenticated() && user" mat-icon-button [matMenuTriggerFor]="appMenu">
+        <span>{{user.username}}</span>
+        <mat-icon class="zmdi zmdi-more-vert zmdi-hc-2x"></mat-icon>
+      </button>
+      <div fxFlex=1></div>
+    
+</mat-toolbar>

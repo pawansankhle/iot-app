@@ -1,0 +1,45 @@
+<div class="container" fxLayout="column">
+
+<mat-nav-list>
+  
+   <!-- Menus for logged in users -->
+   <div *ngIf="authSrv.isAuthenticated()">
+      <ul>
+        <li *ngFor="let menu of menus; let last = last;">
+          <div routerLink="{{menu.link}}"  routerLinkActive #rla="routerLinkActive" [ngClass]="{'active-link' : rla.isActive}" [routerLinkActiveOptions]="{exact:
+            true}">
+            <mat-icon class="zmdi menu-icon" [ngClass]="[menu.icon]"></mat-icon>
+            <a mat-line  (click)="menu.isChildOpen = !menu.isChildOpen;">{{ menu.title | translate}}</a>
+            <span fxFlex></span>
+            <button mat-icon-button *ngIf="menu.children && menu.children.length !== 0">
+              <mat-icon class="zmdi menu-icon" [ngClass]="{ 'zmdi-chevron-down' : menu.isChildOpen,  'zmdi-chevron-right' : !menu.isChildOpen}"></mat-icon>
+            </button>
+          </div>
+          <ul *ngIf="menu.isChildOpen">
+            <li *ngFor="let menu of menu.children; let last = last;">
+                <div routerLink="{{menu.link}}" routerLinkActive #rla="routerLinkActive" [ngClass]="{'active-link' : rla.isActive}" [routerLinkActiveOptions]="{exact:
+                  true}">
+                    <mat-icon class="zmdi menu-icon" [ngClass]="[menu.icon]"></mat-icon>
+                    <a mat-line  (click)="menu.isChildOpen = !menu.isChildOpen;">{{ menu.title | translate}}</a>
+                    <span fxFlex></span>
+                    <button mat-icon-button *ngIf="menu.children && menu.children.length !== 0">
+                      <mat-icon class="zmdi menu-icon" [ngClass]="{ 'zmdi-chevron-down' : menu.isChildOpen,  'zmdi-chevron-right' : !menu.isChildOpen}"></mat-icon>
+                    </button>
+                  </div>
+              <mat-divider *ngIf="!last"></mat-divider>
+            </li>
+            
+          </ul>
+          <mat-divider *ngIf="!last"></mat-divider>
+        </li>
+      </ul>
+   </div>
+  
+  <!-- Menus for not logged in users -->
+  <div *ngIf="!authSrv.isAuthenticated()">
+    <mat-list-item>
+      <a mat-line routerLink="/auth/login" routerLinkActive="active">{{ 'Login' | translate }} </a>
+    </mat-list-item>
+  </div>
+</mat-nav-list>
+</div>

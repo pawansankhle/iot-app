@@ -1,0 +1,57 @@
+
+      <mat-toolbar color="accent">
+        <span fxFlex></span>
+       <span>
+        <button mat-icon-button routerLink="/device/add">
+          <mat-icon class="zmdi zmdi-plus-square primary-icon"></mat-icon>
+        </button>
+       </span>
+      </mat-toolbar>
+      <mat-table #table  [dataSource]="dataSource" matSort matSortActive="DeviceId" matSortDisableClear matSortDirection="asc" >
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="DeviceId">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>DeviceId</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.device_id}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.type }} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="State">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="Status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <!-- no data show  start-->
+      <div *ngIf="dataSource.data.length == 0">
+        <h3 style="text-align:center;">
+            <p>
+              <img src="assets/icon/no-data-found.png">
+            </p>
+            no data found...
+        </h3>
+     </div>
+     <!-- no data show  end-->
+
+    <mat-paginator [hidden]="dataSource.data.length !== 0" #paginator
+                  [pageSize]="10"
+                  [pageSizeOptions]="[5, 10, 20]"
+                  >
+    </mat-paginator>
+
+

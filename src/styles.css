@@ -1,0 +1,146 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.loading {
+  opacity: 0;
+  transition: opacity .8s ease-in-out;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #ddd;
+  z-index: -1;
+}
+
+app-root:empty + .loading {
+  opacity: 1;
+  z-index: 100;
+}
+
+app-root:empty + .loading h1 {
+  color: #3f51b5;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  transform: translate(0, -50%);
+}
+
+
+body{
+margin: 0px;
+}
+
+mat-sidenav.mat-sidenav {
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  min-width: 250px;
+  background-color: #fafafa;
+  box-shadow: 6px 0 6px rgba(0,0,0,.1);
+  height: calc(100vh - 64px);
+}
+
+mat-sidenav-content{
+  padding: 12px;
+}
+
+/* .mat-sidenav-content-login{
+  height: calc(100vh - 0px) !important;
+}
+
+.mat-sidenav-content-main{
+  height: calc(100vh - 64px) !important;
+} */
+
+.mat-drawer-container {
+  z-index: inherit !important;
+}
+
+.normal-content {
+  padding: 0 1em;
+}
+
+
+header {
+  order: 1;
+  flex-shrink: 0;
+}
+
+article {
+  order: 2;
+  flex: 1;
+  overflow: auto;
+}
+
+footer {
+  order: 3;
+  flex-shrink: 0;
+}
+
+.error{
+  color: red;
+  font-size: 15px;
+  line-height: 2.5em;
+  padding-left: 12px;
+}
+
+
+
+/* loading bar css start*/
+.spinner {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  margin: 0 auto;
+}
+
+.bubble-1,
+.bubble-2 {
+  position: absolute;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  background-color: #32db64;
+}
+
+@keyframes bounce  {
+0%, 100% {transform: scale(0.0);}
+50% {transform: scale(1.0);}
+}
+
+.bubble-2 {
+  top: auto;
+  bottom: 0;
+}
+
+@keyframes loadingI {
+100% {transform: rotate(360deg);}
+}
+
+
+.load-9 .spinner {animation: loadingI 2s linear infinite;}
+.load-9 .bubble-1, .load-9 .bubble-2 {animation: bounce 2s ease-in-out infinite;}
+.load-9 .bubble-2 {animation-delay: -1.0s;}
+
+.load-9 {
+position: absolute;
+left: 50;
+left: 0;
+right: 50px;
+top: 40%;
+z-index: 1;
+}
+
+.primary-icon{
+  color: #fff;
+  font-size: 25px !important;
+}
+

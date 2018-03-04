@@ -1,0 +1,35 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxFill id="login-form">
+    <mat-card class="login">
+        <!-- <mat-card-title>Login</mat-card-title> -->
+        <mat-card-content>
+            <form novalidate [formGroup]="loginForm">
+                <p text-center>
+                    <span class="error">{{error}}</span>
+                </p>
+                <div fxLayout="column">
+                    <mat-form-field [ngClass]="{'has-error':!username.valid && username.touched }">
+                            <label floating>Username</label>
+                            <input [formControl]="username" matInput  type="text" />
+                    </mat-form-field>
+                    <span *ngIf="(username.hasError('minlength') || username.hasError('maxlength')) && username.touched" class="error">miminum 3 char.</span>
+                    <span *ngIf="username.hasError('required') && username.touched" class="error">You must include user Name.</span>
+                    
+                    <mat-form-field [ngClass]="{'has-error':!password.valid && password.touched }">
+                        <label floating>Password</label>
+                        <input [formControl]="password" matInput  type="password" />
+                    </mat-form-field>
+                    <span *ngIf="(password.hasError('minlength') || password.hasError('maxlength')) && password.touched" class="error">password Must be 4 char.</span>
+                    <span *ngIf="password.hasError('required') && password.touched" class="error">You must include password.</span>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions fxLayout="column" fxLayoutAlign="center center" fxFill>
+            <button [disabled]="!loginForm.valid || disabled" mat-raised-button mat-button color="primary"  (click)="login(loginForm.value)">Login</button>
+        </mat-card-actions>
+        <a mat-button class="login-btn" routerLink=".">Signup</a>
+        <a mat-button class="login-btn" routerLink=".">Forgot Password..??</a>
+       
+    </mat-card>
+
+</div>
+  

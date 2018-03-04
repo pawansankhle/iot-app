@@ -1,0 +1,25 @@
+#login-form mat-card{
+    min-width: 35%;
+    box-shadow: none;
+}
+
+#login-form mat-card mat-card-actions button{
+    width: 100%;
+}
+
+#login-form mat-card{
+    background-color: transparent;
+    color: #E8EAF6;
+}
+
+
+
+#login-form{
+    background: url("../../../assets/images/bulb-2388828_1920.jpg") no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+}
+
+.login-btn{
+color:#C5CAE9
+}
