@@ -61,6 +61,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }else {
       this.route.navigate(['/auth/login']);
     }
+    setTimeout(() => {
+      this.opened = true;
+    }, 500);
+
   }
 
   ngOnDestroy() {
