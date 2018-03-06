@@ -59,8 +59,8 @@ _serverError(err: any) {
     });
   }
 
-  getWithPagination(url, sort: string, order: string, page: number) {
-    const pagination = `?sort=${sort}&order=${order}&page=${page}`;
+  getWithPagination(url, sortBy: string, sortType: string, page: number, limit: number) {
+    const pagination = `?sortBy=${sortBy}&sortType=${sortType}&page=${page}&limit=${limit}`;
     return this.http.get(url + pagination, {
       headers: this.headers,
     })
@@ -73,7 +73,7 @@ _serverError(err: any) {
   post(url, data) {
    return this.http.post(url, data, {
      headers: this.headers,
-     // withCredentials: true
+     withCredentials: true
     })
     .catch(e => {
       return this._serverError(e);

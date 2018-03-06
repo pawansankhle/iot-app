@@ -9,5 +9,7 @@ export const UrlConstant =  {
     USER_ENABLE: URL.baseApiUrl + '/user/enable',
     USER_DELETE_URL: URL.baseApiUrl + '/user/delete',
     EDIT_USER_URL: URL.baseApiUrl + '/user/edit',
-    GET_ALL_DEVICES: URL.baseApiUrl + '/device'
+    DEVICE_URL: URL.baseApiUrl + '/device',
+    CREATE_DEVICE_URL: URL.baseApiUrl + '/device',
+    SEARCH_DEVICE_URL: URL.baseApiUrl + '/device/search'
 }

@@ -1,3 +1,79 @@
-<p>
-  add-device works!
-</p>
+<mat-toolbar color="accent">
+        <span>
+            <button mat-icon-button>
+                <mat-icon aria-label="back to device" class="zmdi zmdi-arrow-left back-icon"></mat-icon>
+            </button>
+        </span>
+        <span fxFlex></span>
+      </mat-toolbar>
+<form [formGroup]="deviceForm">
+  <div class="main-content">
+      <mat-card class="add-card">
+          <mat-card-header>
+              <mat-card-title>
+                <span class="title">Add Device</span>
+              </mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <div fxFlex="50">
+                        <mat-form-field>
+                            <input matInput placeholder="name" [formControl]="name">
+                            <mat-error *ngIf="name.invalid">{{errMsgSrv.getFormErrorMessage(name)}}</mat-error>
+                            </mat-form-field>
+                    </div>
+                    <div fxFlex="50">
+                        <mat-form-field>
+                            <input matInput placeholder="lat,lng" [formControl]="location">
+                            <mat-error *ngIf="location.invalid">{{errMsgSrv.getFormErrorMessage(location)}}</mat-error>
+                        </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+              <div fxFlex="50">
+                  <mat-form-field>
+                      <input matInput placeholder="Device Id" [formControl]="device_id">
+                      <mat-error *ngIf="device_id.invalid">{{errMsgSrv.getFormErrorMessage(device_id)}}</mat-error>
+                    </mat-form-field>
+              </div>
+
+              <div fxFlex="50">
+                  <mat-form-field>
+                      <mat-select placeholder="Device Type" [formControl]="type">
+                          <mat-option  value="">--please select--</mat-option>
+                          <mat-option *ngFor="let dtype of deviceTypes" value="{{dtype}}">
+                            {{ dtype }}
+                          </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="type.invalid">{{errMsgSrv.getFormErrorMessage(type)}}</mat-error>
+                    </mat-form-field>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <!-- <div fxFlex="50">
+                    <mat-form-field>
+                        <mat-select placeholder="Device State" [formControl]="state">
+                            <mat-option  value="">--please select--</mat-option>
+                            <mat-option *ngFor="let stateItem of deviceStates" value="{{stateItem}}">
+                              {{ stateItem }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="state.invalid">{{errMsgSrv.getFormErrorMessage(state)}}</mat-error>
+                      </mat-form-field>
+                </div> -->
+            </div>
+
+          </mat-card-content>
+          <mat-card-actions>
+              <span fxFlex></span>
+              <button mat-button >Cancel</button>
+              <button mat-raised-button color="primary" [disabled]="!deviceForm.valid || disabled" (click)="onDeviceAdd(deviceForm.value)">Add</button>
+              <span fxFlex="3"></span>
+            </mat-card-actions>
+    </mat-card>
+  </div>
+</form>

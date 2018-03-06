@@ -45,6 +45,12 @@ export class AuthService implements IAuth {
         return isAuth;
     }
 
+    removeToken() {
+        if (localStorage.getItem('token')) {
+            localStorage.removeItem('token');
+        }
+    }
+
     // delete the token in localStorage and change the navbar state
     logout(): Observable<any>  {
         return this.http.get(UrlConstant.USER_SIGNOUT_URL)
@@ -56,8 +62,8 @@ export class AuthService implements IAuth {
 
     // save the token in localStorage and change the navbar state
     saveToken(token: string): void {
-    localStorage.setItem('token', token);
-    this.authenticate.next(true);
+        localStorage.setItem('token', token);
+        this.authenticate.next(true);
     }
 
     login(form: any): Observable<any> {

@@ -1,36 +1,58 @@
 
-      <mat-toolbar color="accent">
-        <span fxFlex></span>
-       <span>
-        <button mat-icon-button routerLink="/device/add">
-          <mat-icon class="zmdi zmdi-plus-square primary-icon"></mat-icon>
-        </button>
-       </span>
-      </mat-toolbar>
+
+<mat-toolbar color="accent">
+  <span fxFlex></span>
+  <span>
+  <button mat-icon-button routerLink="/device/add">
+    <mat-icon class="zmdi zmdi-plus-square primary-icon"></mat-icon>
+  </button>
+  </span>
+</mat-toolbar>
+
+<div class="main-content">
+  
       <mat-table #table  [dataSource]="dataSource" matSort matSortActive="DeviceId" matSortDisableClear matSortDirection="asc" >
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name || '--'}} </mat-cell>
+        </ng-container>
 
         <!-- Position Column -->
         <ng-container matColumnDef="DeviceId">
           <mat-header-cell *matHeaderCellDef  mat-sort-header>DeviceId</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.device_id}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.device_id  || '--'}} </mat-cell>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="Type">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.type }} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.type  || '--'}} </mat-cell>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="State">
           <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+          <mat-cell *matCellDef="let element"> 
+            <mat-slide-toggle
+            [(ngModel)]="element.state"
+            [color]="primary"
+            [checked]="element.state"
+            [disabled]="disabled">
+            {{element.state ? 'ON' : 'OFF'}}
+        </mat-slide-toggle> 
+          </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="Status">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+          <mat-cell *matCellDef="let element"> 
+            <mat-icon *ngIf="element.status == 'ONLINE'" class="zmdi zmdi-wifi zmdi-hc-2x"></mat-icon>
+            <mat-icon *ngIf="element.status == 'OFFLINE'"class="zmdi zmdi-wifi-off zmdi-hc-2x"></mat-icon>
+       
+          </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -53,5 +75,6 @@
                   [pageSizeOptions]="[5, 10, 20]"
                   >
     </mat-paginator>
+</div>
 
 

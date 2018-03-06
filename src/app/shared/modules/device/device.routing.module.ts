@@ -8,10 +8,11 @@ export const DeviceRoutes: Routes = [
     path: '',
     component: DeviceComponent,
     canActivate: [],
-    children: [
-      ...AddDeviceRoutes,
-    ],
-  },
+    data: {
+      breadcrumbs: 'Device'
+    }
+    },
+  ...AddDeviceRoutes
 ];
 
 

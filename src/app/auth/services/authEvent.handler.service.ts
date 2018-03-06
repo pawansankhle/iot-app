@@ -3,13 +3,14 @@ import {AuthEventType} from '../constants/auth.events.constant';
 import { AuthEvent } from '../models/auth.class';
 import { Observable } from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEventHandlerService {
     private eventSource: Subject<AuthEvent> = new Subject<AuthEvent>();
     public events: Observable<AuthEvent> = this.eventSource.asObservable();
 
-    constructor() {}
+    constructor(private route: Router) {}
 
 
     private emitEvent(event: AuthEvent) {

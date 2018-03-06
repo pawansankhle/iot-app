@@ -7,5 +7,9 @@ export const AddDeviceRoutes: Routes = [
       path: 'add',
       component: AddDeviceComponent,
       canActivate: [],
+      data: {
+        breadcrumb: 'add Device'
+      }
     },
   ];
+

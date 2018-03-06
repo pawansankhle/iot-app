@@ -6,6 +6,7 @@ import { Device } from '../../models/device.model';
 import { HttpClientService } from '../../services/http.service';
 import { UrlConstant } from '../../constants/url.constant';
 import {map} from 'rxjs/operators/map';
+import { DeviceService } from './device.service';
 
 @Component({
   selector: 'app-light',
@@ -13,7 +14,7 @@ import {map} from 'rxjs/operators/map';
   styleUrls: ['./device.component.css']
 })
 export class DeviceComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['DeviceId', 'Type', 'State', 'Status'];
+  displayedColumns = ['name', 'DeviceId', 'Type', 'State', 'Status'];
   // 'Enabled', 'Active',  'Location'
   dataSource = new MatTableDataSource();
 
@@ -25,15 +26,16 @@ export class DeviceComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private http: HttpClientService) { }
+  constructor(private http: HttpClientService, private service: DeviceService) { }
 
   ngOnInit() {
     // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    this.http.getWithPagination(UrlConstant.GET_ALL_DEVICES, 'deviceId', 'desc', this.paginator.pageIndex)
-    .subscribe(data => {
+    this.service.search('deviceId', 'desc', this.paginator.pageIndex + 1 , 10)
+   .subscribe(data => {
       console.log(data);
-      this.dataSource.data = data;
+      this.dataSource.data = data.docs;
+      this.resultsLength = data.total;
     });
   }
 

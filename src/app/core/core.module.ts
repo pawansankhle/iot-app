@@ -7,7 +7,6 @@ import { coreRoutes } from './core.routing';
 import 'hammerjs';
 import { Ng2Webstorage } from 'ng2-webstorage';
 import { ScrollbarModule } from 'ngx-scrollbar';
-
 @NgModule({
     declarations: [],
     imports: [
@@ -32,7 +31,7 @@ import { ScrollbarModule } from 'ngx-scrollbar';
               HttpModule,
               FlexLayoutModule,
               FormsModule,
-              ScrollbarModule
+              ScrollbarModule,
               ]
 })
 

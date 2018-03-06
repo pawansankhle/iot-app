@@ -3,6 +3,7 @@
       <mat-icon class="zmdi zmdi-menu zmdi-hc-2x"></mat-icon>
     </button>
     <div fxFlex></div>
+    <div class="user_avatar"></div>
     <mat-menu #appMenu="matMenu">
         <button mat-menu-item>
           <mat-icon class="zmdi zmdi-settings"></mat-icon>
@@ -15,9 +16,9 @@
       </mat-menu>
       
       <button *ngIf="authSrv.isAuthenticated() && user" mat-icon-button [matMenuTriggerFor]="appMenu">
-        <span>{{user.username}}</span>
+        <span>{{user.username | uppercase}}</span>
         <mat-icon class="zmdi zmdi-more-vert zmdi-hc-2x"></mat-icon>
       </button>
-      <div fxFlex=1></div>
+      <div fxFlex="2"></div>
     
 </mat-toolbar>

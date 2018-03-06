@@ -13,7 +13,12 @@ import { MatToolbarModule,
          MatButtonToggle,
          MatButtonToggleModule,
          MatTableModule,
-         MatPaginatorModule
+         MatPaginatorModule,
+         MAT_LABEL_GLOBAL_OPTIONS,
+         MatOptionModule,
+         MatSelectModule,
+         MatSliderModule,
+         MatSlideToggleModule
          } from '@angular/material';
 import { CommonModule } from '@angular/common';
 @NgModule({
@@ -32,7 +37,10 @@ import { CommonModule } from '@angular/common';
         MatMenuModule,
         MatButtonToggleModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatSlideToggleModule
     ],
     exports : [
         MatToolbarModule,
@@ -48,9 +56,13 @@ import { CommonModule } from '@angular/common';
         MatMenuModule,
         MatButtonToggleModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatSlideToggleModule
     ],
-    declarations: []
+    declarations: [],
+    providers: [{provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'hover'}}]
 })
 
 export class MaterialModule {}

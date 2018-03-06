@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'ng2-webstorage';
 import { ErrorEventHandlerService } from './shared/services/error.event.handler.service';
 import { ErrorEventType } from './shared/constants';
-import { ErrorEvent } from './shared/models';
+import { ErrorEvent } from './shared/models/error.model';
 import { Router } from '@angular/router';
 import { setTimeout } from 'timers';
 import { AuthService } from './auth/services/auth.service';
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   navigateUser() {
     if (this.authSrv.isAuthenticated()) {
-      this.route.navigate(['/dashboard']);
+      this.route.navigate(['/device']);
     }else {
       this.route.navigate(['/auth/login']);
     }
@@ -69,6 +69,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   _errorHandler(ev) {
+    console.log(ev);
     switch (ev.type) {
       case ErrorEventType.PAGE_NOT_FOUND:
         this.route.navigate(['/page-not-found'], { queryParams: { url : ev.value.url }, skipLocationChange: true,  });

@@ -7,9 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService, AuthEventHandlerService } from './auth/services';
+import { LocationService } from './shared/services/location.service';
 import { LoaderModule } from './shared/modules/loader/loader.module';
 import { MaterialModule } from './shared/modules/material.module';
-
+import { MessageService } from './shared/services/message.service';
+import { DeviceService } from './shared/modules/device/device.service';
+import { ErrorMessageService } from './shared/services/error.message.service';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -18,12 +21,16 @@ import { MaterialModule } from './shared/modules/material.module';
     LayoutModule,
     AppRoutingModule,
     LoaderModule,
-    MaterialModule
+    MaterialModule,
     ],
-    exports: [ MaterialModule ],
+  exports: [ MaterialModule ],
   providers: [
     AuthService,
-    AuthEventHandlerService
+    AuthEventHandlerService,
+    LocationService,
+    DeviceService,
+    MessageService,
+    ErrorMessageService
   ],
   bootstrap: [AppComponent]
 })
