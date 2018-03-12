@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 const appRoutes: Routes = [
   { path: 'auth',  loadChildren : './auth/auth.module#AuthModule' },
   { path: 'device',  loadChildren : './shared/modules/device/device.module#DeviceModule' },
+  { path: 'control',  loadChildren : './shared/modules/control/control.module#ControlModule' },
   { path: '',   redirectTo: '/', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

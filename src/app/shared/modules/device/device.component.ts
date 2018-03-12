@@ -8,14 +8,21 @@ import { UrlConstant } from '../../constants/url.constant';
 import {map} from 'rxjs/operators/map';
 import { DeviceService } from './device.service';
 
+import {merge} from 'rxjs/observable/merge';
+import {startWith} from 'rxjs/operators/startWith';
+import {switchMap} from 'rxjs/operators/switchMap';
+import {of as observableOf} from 'rxjs/observable/of';
+import {catchError} from 'rxjs/operators/catchError';
+
+
 @Component({
   selector: 'app-light',
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.css']
 })
 export class DeviceComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['name', 'DeviceId', 'Type', 'State', 'Status'];
-  // 'Enabled', 'Active',  'Location'
+
+  displayedColumns = ['name', 'DeviceId', 'Type', 'Status', 'Action'];
   dataSource = new MatTableDataSource();
 
   resultsLength = 0;
@@ -26,22 +33,53 @@ export class DeviceComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private http: HttpClientService, private service: DeviceService) { }
+  constructor(private http: HttpClientService, private _service: DeviceService) { }
 
-  ngOnInit() {
-    // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+  ngOnInit() {}
 
-    this.service.search('deviceId', 'desc', this.paginator.pageIndex + 1 , 10)
-   .subscribe(data => {
-      console.log(data);
-      this.dataSource.data = data.docs;
-      this.resultsLength = data.total;
+  _loadData() {
+    merge(this.sort.sortChange, this.paginator.page)
+    .pipe(
+      startWith({}),
+      switchMap(() => {
+        this.isLoadingResults = true;
+        return this._service.search(
+          this.sort.active, this.sort.direction, this.paginator.pageIndex + 1, this.paginator.pageSize);
+      }),
+      map(data => {
+        this.isLoadingResults = false;
+        this.isRateLimitReached = false;
+        this.resultsLength = data.total;
+        console.log(this.resultsLength);
+
+        return data.docs;
+      }), catchError(() => {
+        this.isLoadingResults = false;
+        return observableOf([]);
+      })
+    )
+    .subscribe(data => {
+      this.dataSource.data = data;
+      console.log(this.dataSource.data);
     });
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-  }
+    this._loadData();
+   }
+
+   deviceDelete(deviceId) {
+    console.log(deviceId, 'here');
+    this._service.removeById(deviceId)
+    .subscribe(data => {
+      console.log(data);
+      if (data.success) {
+        this.dataSource.data = this.dataSource.data.filter(function(device: Device){
+                return device.device_id !== deviceId;
+        });
+      }
+    });
+
+   }
 }
 

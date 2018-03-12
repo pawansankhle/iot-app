@@ -11,5 +11,11 @@ export const UrlConstant =  {
     EDIT_USER_URL: URL.baseApiUrl + '/user/edit',
     DEVICE_URL: URL.baseApiUrl + '/device',
     CREATE_DEVICE_URL: URL.baseApiUrl + '/device',
-    SEARCH_DEVICE_URL: URL.baseApiUrl + '/device/search'
+    SEARCH_DEVICE_URL: URL.baseApiUrl + '/device/search',
+    DEVICE_REMOVE_BY_ID_URL: URL.baseApiUrl + '/device/removeById/',
+
+    CONTROL_URL: URL.baseApiUrl + '/control',
+    CREATE_CONTROL_URL: URL.baseApiUrl + '/control/search',
+    DELETE_CONTROL_BY_ID_URL: URL.baseApiUrl + '/control/removeById',
+    CONTROL_ENABLE_URL: URL.baseApiUrl + '/control/enable',
 }

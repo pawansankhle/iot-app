@@ -10,6 +10,8 @@ export * from './message.service';
 export * from './http.service';
 export * from './error.event.handler.service';
 export * from './menu.service';
+export * from './error.message.service';
+export * from './location.service';
 
 export const Services = [
   ConfigService,

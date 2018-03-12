@@ -18,9 +18,11 @@ import { MatToolbarModule,
          MatOptionModule,
          MatSelectModule,
          MatSliderModule,
-         MatSlideToggleModule
+         MatSlideToggleModule,
+         MatSortModule
          } from '@angular/material';
 import { CommonModule } from '@angular/common';
+
 @NgModule({
     imports : [
         MatToolbarModule,
@@ -40,7 +42,8 @@ import { CommonModule } from '@angular/common';
         MatPaginatorModule,
         MatOptionModule,
         MatSelectModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatSortModule
     ],
     exports : [
         MatToolbarModule,
@@ -59,7 +62,8 @@ import { CommonModule } from '@angular/common';
         MatPaginatorModule,
         MatOptionModule,
         MatSelectModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatSortModule
     ],
     declarations: [],
     providers: [{provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'hover'}}]

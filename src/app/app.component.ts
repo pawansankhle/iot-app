@@ -56,13 +56,15 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   navigateUser() {
+    let navOpen = false;
     if (this.authSrv.isAuthenticated()) {
       this.route.navigate(['/device']);
+      navOpen = true;
     }else {
       this.route.navigate(['/auth/login']);
     }
     setTimeout(() => {
-      this.opened = true;
+      this.opened = navOpen;
     }, 500);
 
   }
@@ -74,6 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   _errorHandler(ev) {
     console.log(ev);
+    console.log(ErrorEventType.SERVER_ERROR)
     switch (ev.type) {
       case ErrorEventType.PAGE_NOT_FOUND:
         this.route.navigate(['/page-not-found'], { queryParams: { url : ev.value.url }, skipLocationChange: true,  });

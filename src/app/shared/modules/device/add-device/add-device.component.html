@@ -1,21 +1,20 @@
-<mat-toolbar color="accent">
-        <span>
-            <button mat-icon-button>
-                <mat-icon aria-label="back to device" class="zmdi zmdi-arrow-left back-icon"></mat-icon>
-            </button>
-        </span>
-        <span fxFlex></span>
-      </mat-toolbar>
+
 <form [formGroup]="deviceForm">
   <div class="main-content">
-      <mat-card class="add-card">
-          <mat-card-header>
-              <mat-card-title>
+        <mat-toolbar color="accent">
+            <span>
+                <button mat-icon-button (click)="goBack()">
+                    <mat-icon aria-label="back to device" class="zmdi zmdi-arrow-left back-icon"></mat-icon>
+                </button>
                 <span class="title">Add Device</span>
-              </mat-card-title>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <mat-card-content>
+            </span>
+            <span fxFlex></span>
+            <button mat-button (click)="goBack()">Cancel</button>
+            <button mat-button [disabled]="!deviceForm.valid || disabled" (click)="onDeviceAdd(deviceForm.value)">Add</button>
+            <span fxFlex="3"></span>
+        </mat-toolbar>
+      <mat-card class="add-card">
+         <mat-card-content>
             
             <div fxLayout="row" fxLayoutAlign="space-around center">
                     <div fxFlex="50">
@@ -31,6 +30,27 @@
                         </mat-form-field>
                 </div>
             </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Inactive Duration" type="number" [formControl]="inactive_duration">
+                        <mat-error *ngIf="inactive_duration.invalid">{{errMsgSrv.getFormErrorMessage(inactive_duration)}}</mat-error>
+                      </mat-form-field>
+                </div>
+  
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <mat-select placeholder="Unit" [formControl]="inactive_duration_unit">
+                            <mat-option  value="">--please select--</mat-option>
+                            <mat-option *ngFor="let unit of deviceInactiveUnit" value="{{unit}}">
+                              {{ unit }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="inactive_duration_unit.invalid">{{errMsgSrv.getFormErrorMessage(inactive_duration_unit)}}</mat-error>
+                      </mat-form-field>
+                </div>
+              </div>
 
             <div fxLayout="row" fxLayoutAlign="space-around center">
               <div fxFlex="50">
@@ -70,9 +90,7 @@
           </mat-card-content>
           <mat-card-actions>
               <span fxFlex></span>
-              <button mat-button >Cancel</button>
-              <button mat-raised-button color="primary" [disabled]="!deviceForm.valid || disabled" (click)="onDeviceAdd(deviceForm.value)">Add</button>
-              <span fxFlex="3"></span>
+              
             </mat-card-actions>
     </mat-card>
   </div>

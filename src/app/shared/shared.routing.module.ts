@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
+
 
 @NgModule({
     imports: [
@@ -8,6 +10,10 @@ import { RouterModule } from '@angular/router';
           path: '',
           children: [],
         },
+        {
+          path: 'internal-server-error',
+          component: InternalServerErrorComponent
+        }
       ]),
     ],
     exports: [

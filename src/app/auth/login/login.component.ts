@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit {
     this.disabled = true;
     this.authSrv.login(form)
     .subscribe(res => {
+      this.loaderService.hide();
       if (res.success) {
           this.disabled = false;
           this.authSrv.saveToken(res.token);
       }else {
         this.error = res.message;
-        this.loaderService.hide();
         this.disabled = false;
       }
     });

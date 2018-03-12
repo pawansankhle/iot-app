@@ -21,7 +21,6 @@ export class MessageService {
    */
   public simple(message: string, showCloseButton = false, duration = 6000): MatSnackBarRef<SimpleSnackBar> {
     const ref = this.snackBar.open(message, showCloseButton ? 'close' : null, { duration: duration });
-
     ref.onAction().subscribe(() => {});
 
     return ref;

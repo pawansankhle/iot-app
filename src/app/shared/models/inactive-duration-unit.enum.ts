@@ -1,0 +1,4 @@
+export enum INACTIVE_DURATION_UNIT {'MONTHS', 'DAYS', 'MINUTES' }
+
+export const INACTIVE_DURATION_UNIT_ARR = [ 'MONTHS', 'DAYS', 'MINUTES'  ]
+

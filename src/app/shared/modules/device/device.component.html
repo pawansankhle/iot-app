@@ -1,18 +1,15 @@
-
-
 <mat-toolbar color="accent">
-  <span fxFlex></span>
-  <span>
-  <button mat-icon-button routerLink="/device/add">
-    <mat-icon class="zmdi zmdi-plus-square primary-icon"></mat-icon>
-  </button>
-  </span>
-</mat-toolbar>
-
+    <span fxFlex></span>
+    <span>
+    <button mat-icon-button routerLink="/device/add">
+      <mat-icon class="zmdi zmdi-plus-square primary-icon"></mat-icon>
+    </button>
+    </span>
+  </mat-toolbar>
 <div class="main-content">
-  
-      <mat-table #table  [dataSource]="dataSource" matSort matSortActive="DeviceId" matSortDisableClear matSortDirection="asc" >
-
+ 
+  <mat-table #table [dataSource]="dataSource" matSort matSortActive="DeviceId" matSortDisableClear matSortDirection="asc" >
+     
         <!-- Position Column -->
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef  mat-sort-header>Name</mat-header-cell>
@@ -32,7 +29,7 @@
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="State">
+        <!-- <ng-container matColumnDef="State">
           <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
           <mat-cell *matCellDef="let element"> 
             <mat-slide-toggle
@@ -43,36 +40,56 @@
             {{element.state ? 'ON' : 'OFF'}}
         </mat-slide-toggle> 
           </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="Status">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
           <mat-cell *matCellDef="let element"> 
-            <mat-icon *ngIf="element.status == 'ONLINE'" class="zmdi zmdi-wifi zmdi-hc-2x"></mat-icon>
-            <mat-icon *ngIf="element.status == 'OFFLINE'"class="zmdi zmdi-wifi-off zmdi-hc-2x"></mat-icon>
-       
+            <mat-icon *ngIf="element.is_online" class="zmdi zmdi-wifi table-icon color-mat_green"></mat-icon>
+            <mat-icon *ngIf="!element.is_online"class="zmdi zmdi-wifi-off table-icon color-mat-red"></mat-icon>
           </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="Action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon class="zmdi zmdi-more-vert table-icon"></mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="deviceDelete(element.device_id)">
+                  <mat-icon class="zmdi zmdi-delete table-icon"></mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </mat-cell>
+          </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      
       </mat-table>
-
+  
       <!-- no data show  start-->
       <div *ngIf="dataSource.data.length == 0">
         <h3 style="text-align:center;">
-            <p>
-              <img src="assets/icon/no-data-found.png">
-            </p>
-            no data found...
+            <span *ngIf="!isLoadingResults">
+              <p>
+                <img src="assets/icon/no-data-found.png">
+              </p>
+              no data found...
+            </span>
+            <span *ngIf="isLoadingResults">Loading...</span>
+            
         </h3>
      </div>
      <!-- no data show  end-->
 
     <mat-paginator [hidden]="dataSource.data.length !== 0" #paginator
                   [pageSize]="10"
-                  [pageSizeOptions]="[5, 10, 20]"
+                  [pageSizeOptions]="[5, 10, 20,25]"
+                  [length]="resultsLength"
                   >
     </mat-paginator>
 </div>

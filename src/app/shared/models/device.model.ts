@@ -1,6 +1,6 @@
 import { User } from './user.model';
 import { Type } from './type.enum';
-import { Status} from './status.enum';
+import { INACTIVE_DURATION_UNIT } from './inactive-duration-unit.enum';
 import { Location } from './location.model';
 
 export interface Device {
@@ -12,9 +12,11 @@ export interface Device {
     modified_on: Date;
     enabled: Boolean;
     deleted: Boolean;
+    inactive_duration: Number;
+    inactive_duration_unit: INACTIVE_DURATION_UNIT;
     type: Type;
     state: Boolean;
-    status: Status;
+    is_online: Boolean;
     location: Location;
     name: String;
 

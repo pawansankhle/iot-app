@@ -1,9 +1,10 @@
+<app-loader></app-loader>
 <router-outlet name="header"></router-outlet>
 <mat-sidenav-container class="example-container">
-        <app-loader></app-loader>
+      
 
         <mat-sidenav #sidenav mode="side" [(opened)]="opened">
-                <mat-toolbar color="primary">
+                <mat-toolbar  color="primary">
                         <h2>IOT-app</h2>
                         <div fxFelx></div>
                         <!-- <app-network-indigator></app-network-indigator> -->
@@ -11,11 +12,16 @@
                 <router-outlet name="sidenav"></router-outlet>
         </mat-sidenav>
 
-        <mat-sidenav-content [ngClass]="{'mat-sidenav-content-login': !authSrv.isAuthenticated(), 'mat-sidenav-content-main': authSrv.isAuthenticated()}">
-                <!-- <breadcrumbs></breadcrumbs> -->
-                <router-outlet></router-outlet>
-                <!--<footer><router-outlet name="footer"></router-outlet></footer> -->
-        </mat-sidenav-content>
+        
+                <mat-sidenav-content [ngClass]="{'mat-sidenav-content-login': !authSrv.isAuthenticated(), 'mat-sidenav-content-main': authSrv.isAuthenticated()}">
+                        <!-- <breadcrumbs></breadcrumbs> -->
+                        <ng-scrollbar>
+                                <router-outlet></router-outlet>
+                        </ng-scrollbar>
+                        <!--<footer><router-outlet name="footer"></router-outlet></footer> -->
+                </mat-sidenav-content>
+        
+        
 </mat-sidenav-container>
 
 <!-- <mat-sidenav-container>
