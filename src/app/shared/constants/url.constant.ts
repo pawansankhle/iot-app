@@ -15,7 +15,7 @@ export const UrlConstant =  {
     DEVICE_REMOVE_BY_ID_URL: URL.baseApiUrl + '/device/removeById/',
 
     CONTROL_URL: URL.baseApiUrl + '/control',
-    CREATE_CONTROL_URL: URL.baseApiUrl + '/control/search',
+    CONTROL_SEARCH_URL: URL.baseApiUrl + '/control/search',
     DELETE_CONTROL_BY_ID_URL: URL.baseApiUrl + '/control/removeById',
-    CONTROL_ENABLE_URL: URL.baseApiUrl + '/control/enable',
+    CONTROL_ONOFF_URL: URL.baseApiUrl + '/control/onOff',
 }

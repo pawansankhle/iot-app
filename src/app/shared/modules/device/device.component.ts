@@ -3,7 +3,6 @@ import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { Device } from '../../models/device.model';
-import { HttpClientService } from '../../services/http.service';
 import { UrlConstant } from '../../constants/url.constant';
 import {map} from 'rxjs/operators/map';
 import { DeviceService } from './device.service';
@@ -33,7 +32,7 @@ export class DeviceComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private http: HttpClientService, private _service: DeviceService) { }
+  constructor(private _service: DeviceService) { }
 
   ngOnInit() {}
 

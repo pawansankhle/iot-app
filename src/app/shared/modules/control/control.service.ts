@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import { Device } from '../../models/device.model';
+import { Device, Control } from '../../models';
 import { HttpClientService } from '../../services/http.service';
 import { UrlConstant } from '../../constants/url.constant';
 import { MessageService } from '../../services/message.service';
 import {LoaderService} from '../../modules/loader/loader.service';
 
 @Injectable()
-export class DeviceService {
+export class ControlService {
 
   constructor(public http: HttpClientService,
              public _messageSrv: MessageService,
@@ -15,7 +15,7 @@ export class DeviceService {
 
   create(device) {
     this._loader.show();
-    const url = UrlConstant.CREATE_DEVICE_URL;
+    const url = UrlConstant.CONTROL_URL;
     return this.http.post(url, device)
     .map(res => {
       this._loader.hide();
@@ -31,9 +31,21 @@ export class DeviceService {
 
   }
 
-  getAllDeives() {
-    return this.http.get(UrlConstant.DEVICE_URL)
-    .map(res => res.json());
+
+  searchControls(sortBy: string, sortType: string, page: number, limit: number) {
+    const url = UrlConstant.CONTROL_SEARCH_URL;
+    return this.http.getWithPagination(url, sortBy, sortType, page, limit);
+
+  }
+
+  controlOnOff(control: Control) {
+    const url = UrlConstant.CONTROL_ONOFF_URL + `/${control._id}/${control.state}`;
+    return this.http.post(url, control).
+    map(res => {
+      const result = res.json();
+      this._messageSrv.simple(result.message);
+      return result;
+    });
   }
 
   removeById(deviceId) {

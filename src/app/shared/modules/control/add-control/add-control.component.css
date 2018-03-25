@@ -1,0 +1,6 @@
+mat-card.add-card mat-card-content{
+    margin-top: 16px;
+   }
+   mat-card.add-card mat-form-field{
+       width: 95%;
+   }

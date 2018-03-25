@@ -1,0 +1,67 @@
+
+<form [formGroup]="controlForm">
+  <div class="main-content">
+        <mat-toolbar color="accent">
+            <span>
+                <button mat-icon-button (click)="goBack()">
+                    <mat-icon aria-label="back to device" class="zmdi zmdi-arrow-left back-icon"></mat-icon>
+                </button>
+                <span class="title">Add Control</span>
+            </span>
+            <span fxFlex></span>
+            <button mat-button (click)="goBack()">Cancel</button>
+            <button mat-button [disabled]="!controlForm.valid || disabled" (click)="onControlAdd(controlForm.value)">Add</button>
+            <span fxFlex="3"></span>
+        </mat-toolbar>
+      <mat-card class="add-card">
+         <mat-card-content>
+            
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                    <div fxFlex="50">
+                        <mat-form-field>
+                            <input matInput placeholder="name" [formControl]="name">
+                            <mat-error *ngIf="name.invalid">{{errMsgSrv.getFormErrorMessage(name)}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="50">
+                      <mat-form-field>
+                          <mat-select placeholder="type" [formControl]="type">
+                              <mat-option  value="">--please select--</mat-option>
+                              <mat-option *ngFor="let type of controlTypes" value="{{type}}">
+                                {{ type }}
+                              </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="type.invalid">{{errMsgSrv.getFormErrorMessage(type)}}</mat-error>
+                        </mat-form-field>
+                  </div>
+                    
+            </div>
+            
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="50" formGroupName="control_by">
+                    <mat-form-field>
+                        <mat-select placeholder="Controlled By" formControlName="_id">
+                            <mat-option  value="">--please select--</mat-option>
+                            <mat-option *ngFor="let deviceItem of devices" value="{{deviceItem._id}}">
+                              {{ deviceItem.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="control_by.invalid">{{errMsgSrv.getFormErrorMessage(control_by)}}</mat-error>
+                      </mat-form-field>
+                </div>
+                <div fxFlex="50">
+                    <mat-form-field>
+                        <input matInput placeholder="Controller Pin" type="number" [formControl]="controller_pin" min="1" max="40">
+                        <mat-error *ngIf="controller_pin.invalid">{{errMsgSrv.getFormErrorMessage(controller_pin)}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+          </mat-card-content>
+          <mat-card-actions>
+              <span fxFlex></span>
+              
+            </mat-card-actions>
+    </mat-card>
+  </div>
+</form>

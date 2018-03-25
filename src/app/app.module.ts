@@ -10,6 +10,7 @@ import { LocationService } from './shared/services/location.service';
 import { LoaderModule } from './shared/modules/loader/loader.module';
 import { MessageService } from './shared/services/message.service';
 import { DeviceService } from './shared/modules/device/device.service';
+import { ControlService } from './shared/modules/control/control.service';
 import { ErrorMessageService } from './shared/services/error.message.service';
 import { SharedModule } from './shared/shared.module';
 @NgModule({
@@ -29,6 +30,7 @@ import { SharedModule } from './shared/shared.module';
     LocationService,
     DeviceService,
     MessageService,
+    ControlService,
     ErrorMessageService
   ],
   bootstrap: [AppComponent]
